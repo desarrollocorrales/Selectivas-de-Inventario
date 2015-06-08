@@ -3,9 +3,19 @@
   <EntityContainer Name="SeguimientoModelStoreContainer">
     <EntitySet Name="articulos" EntityType="SeguimientoModel.Store.articulos" store:Type="Tables" Schema="seguimiento_acc" />
     <EntitySet Name="etiquetas" EntityType="SeguimientoModel.Store.etiquetas" store:Type="Tables" Schema="seguimiento_acc" />
+    <EntitySet Name="paquetes" EntityType="SeguimientoModel.Store.paquetes" store:Type="Tables" Schema="seguimiento_acc" />
+    <EntitySet Name="paquetes_det" EntityType="SeguimientoModel.Store.paquetes_det" store:Type="Tables" Schema="seguimiento_acc" />
     <AssociationSet Name="fk_clave_articulo" Association="SeguimientoModel.Store.fk_clave_articulo">
       <End Role="articulos" EntitySet="articulos" />
       <End Role="etiquetas" EntitySet="etiquetas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_etiquetas" Association="SeguimientoModel.Store.fk_etiquetas">
+      <End Role="etiquetas" EntitySet="etiquetas" />
+      <End Role="paquetes_det" EntitySet="paquetes_det" />
+    </AssociationSet>
+    <AssociationSet Name="fk_paquetes" Association="SeguimientoModel.Store.fk_paquetes">
+      <End Role="paquetes" EntitySet="paquetes" />
+      <End Role="paquetes_det" EntitySet="paquetes_det" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="articulos">
@@ -46,6 +56,28 @@
     <Property Name="fecha_recepcion" Type="date" />
     <Property Name="fecha_entrega" Type="date" />
   </EntityType>
+  <EntityType Name="paquetes">
+    <Key>
+      <PropertyRef Name="id_paquete" />
+    </Key>
+    <Property Name="id_paquete" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="numero_etiqueta" Type="varchar" MaxLength="14" />
+    <Property Name="estatus" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="cantidad" Type="decimal" Nullable="false" Scale="3" />
+    <Property Name="unidad" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="id_pedido" Type="int" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_caducidad" Type="datetime" Nullable="false" />
+    <Property Name="clave_articulo" Type="varchar" MaxLength="6" />
+  </EntityType>
+  <EntityType Name="paquetes_det">
+    <Key>
+      <PropertyRef Name="id_detalle" />
+    </Key>
+    <Property Name="id_detalle" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="id_paquete" Type="int" Nullable="false" />
+    <Property Name="id_etiqueta" Type="uint" Nullable="false" />
+  </EntityType>
   <Association Name="fk_clave_articulo">
     <End Role="articulos" Type="SeguimientoModel.Store.articulos" Multiplicity="1" />
     <End Role="etiquetas" Type="SeguimientoModel.Store.etiquetas" Multiplicity="*" />
@@ -55,6 +87,30 @@
       </Principal>
       <Dependent Role="etiquetas">
         <PropertyRef Name="clave_articulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_etiquetas">
+    <End Role="etiquetas" Type="SeguimientoModel.Store.etiquetas" Multiplicity="1" />
+    <End Role="paquetes_det" Type="SeguimientoModel.Store.paquetes_det" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="etiquetas">
+        <PropertyRef Name="id_etiqueta" />
+      </Principal>
+      <Dependent Role="paquetes_det">
+        <PropertyRef Name="id_etiqueta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_paquetes">
+    <End Role="paquetes" Type="SeguimientoModel.Store.paquetes" Multiplicity="1" />
+    <End Role="paquetes_det" Type="SeguimientoModel.Store.paquetes_det" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paquetes">
+        <PropertyRef Name="id_paquete" />
+      </Principal>
+      <Dependent Role="paquetes_det">
+        <PropertyRef Name="id_paquete" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

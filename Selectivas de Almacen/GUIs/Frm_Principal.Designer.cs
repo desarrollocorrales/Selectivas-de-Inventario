@@ -40,9 +40,8 @@
             this.gridEscaneo = new DevExpress.XtraGrid.GridControl();
             this.etiquetasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gvEscaneo = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colClaveNombreArticulo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colnumero_etiqueta = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colclave_articulo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colarticulos = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colfecha_caducidad = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colcantidad = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colunidad = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -157,9 +156,8 @@
             this.gvEscaneo.AppearancePrint.GroupFooter.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvEscaneo.AppearancePrint.GroupFooter.Options.UseFont = true;
             this.gvEscaneo.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colClaveNombreArticulo,
             this.colnumero_etiqueta,
-            this.colclave_articulo,
-            this.colarticulos,
             this.colfecha_caducidad,
             this.colcantidad,
             this.colunidad,
@@ -168,77 +166,95 @@
             this.gvEscaneo.GridControl = this.gridEscaneo;
             this.gvEscaneo.GroupCount = 1;
             this.gvEscaneo.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "cantidad", this.colcantidad, ""),
-            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Count, "numero_etiqueta", null, "")});
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Count, "numero_etiqueta", null, ""),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "cantidad", this.colcantidad, "")});
             this.gvEscaneo.Name = "gvEscaneo";
             this.gvEscaneo.OptionsBehavior.Editable = false;
             this.gvEscaneo.OptionsPrint.UsePrintStyles = true;
             this.gvEscaneo.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colclave_articulo, DevExpress.Data.ColumnSortOrder.Ascending)});
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colClaveNombreArticulo, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gvEscaneo.EndGrouping += new System.EventHandler(this.gvEscaneo_EndGrouping);
             this.gvEscaneo.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvEscaneo_CustomColumnDisplayText);
             // 
+            // colClaveNombreArticulo
+            // 
+            this.colClaveNombreArticulo.Caption = "Artículo";
+            this.colClaveNombreArticulo.FieldName = "articulos.ClaveNombreArticulo";
+            this.colClaveNombreArticulo.Name = "colClaveNombreArticulo";
+            this.colClaveNombreArticulo.Visible = true;
+            this.colClaveNombreArticulo.VisibleIndex = 0;
+            // 
             // colnumero_etiqueta
             // 
-            this.colnumero_etiqueta.Caption = "Etiqueta";
+            this.colnumero_etiqueta.AppearanceCell.Options.UseTextOptions = true;
+            this.colnumero_etiqueta.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colnumero_etiqueta.AppearanceHeader.Options.UseTextOptions = true;
+            this.colnumero_etiqueta.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colnumero_etiqueta.Caption = "Número Etiqueta";
             this.colnumero_etiqueta.FieldName = "numero_etiqueta";
             this.colnumero_etiqueta.Name = "colnumero_etiqueta";
             this.colnumero_etiqueta.Visible = true;
             this.colnumero_etiqueta.VisibleIndex = 0;
             // 
-            // colclave_articulo
-            // 
-            this.colclave_articulo.Caption = "Codigo";
-            this.colclave_articulo.FieldName = "clave_articulo";
-            this.colclave_articulo.Name = "colclave_articulo";
-            // 
-            // colarticulos
-            // 
-            this.colarticulos.Caption = "Articulo";
-            this.colarticulos.FieldName = "articulos.articulo";
-            this.colarticulos.Name = "colarticulos";
-            this.colarticulos.Visible = true;
-            this.colarticulos.VisibleIndex = 1;
-            // 
             // colfecha_caducidad
             // 
+            this.colfecha_caducidad.AppearanceCell.Options.UseTextOptions = true;
+            this.colfecha_caducidad.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colfecha_caducidad.AppearanceHeader.Options.UseTextOptions = true;
+            this.colfecha_caducidad.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.colfecha_caducidad.Caption = "Caducidad";
             this.colfecha_caducidad.FieldName = "fecha_caducidad";
             this.colfecha_caducidad.Name = "colfecha_caducidad";
             this.colfecha_caducidad.Visible = true;
-            this.colfecha_caducidad.VisibleIndex = 2;
+            this.colfecha_caducidad.VisibleIndex = 1;
             // 
             // colcantidad
             // 
+            this.colcantidad.AppearanceCell.Options.UseTextOptions = true;
+            this.colcantidad.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.colcantidad.AppearanceHeader.Options.UseTextOptions = true;
+            this.colcantidad.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.colcantidad.Caption = "Cantidad";
             this.colcantidad.FieldName = "cantidad";
             this.colcantidad.Name = "colcantidad";
             this.colcantidad.Visible = true;
-            this.colcantidad.VisibleIndex = 3;
+            this.colcantidad.VisibleIndex = 2;
             // 
             // colunidad
             // 
+            this.colunidad.AppearanceCell.Options.UseTextOptions = true;
+            this.colunidad.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.colunidad.AppearanceHeader.Options.UseTextOptions = true;
+            this.colunidad.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colunidad.Caption = "Unidad";
             this.colunidad.FieldName = "unidad";
             this.colunidad.Name = "colunidad";
             this.colunidad.Visible = true;
-            this.colunidad.VisibleIndex = 4;
+            this.colunidad.VisibleIndex = 3;
             // 
             // colpiezas
             // 
+            this.colpiezas.AppearanceCell.Options.UseTextOptions = true;
+            this.colpiezas.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colpiezas.AppearanceHeader.Options.UseTextOptions = true;
+            this.colpiezas.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.colpiezas.Caption = "Piezas";
             this.colpiezas.FieldName = "piezas";
             this.colpiezas.Name = "colpiezas";
             this.colpiezas.Visible = true;
-            this.colpiezas.VisibleIndex = 5;
+            this.colpiezas.VisibleIndex = 4;
             // 
             // colestatus
             // 
+            this.colestatus.AppearanceCell.Options.UseTextOptions = true;
+            this.colestatus.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colestatus.AppearanceHeader.Options.UseTextOptions = true;
+            this.colestatus.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.colestatus.Caption = "Estatus";
             this.colestatus.FieldName = "estatus";
             this.colestatus.Name = "colestatus";
             this.colestatus.Visible = true;
-            this.colestatus.VisibleIndex = 6;
+            this.colestatus.VisibleIndex = 5;
             // 
             // btnImprimir
             // 
@@ -273,6 +289,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Principal";
             this.Text = "Selectivas de almacen";
+            this.Load += new System.EventHandler(this.Frm_Principal_Load);
             this.pnlTitulo.ResumeLayout(false);
             this.pnlTitulo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridEscaneo)).EndInit();
@@ -297,9 +314,8 @@
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.OpenFileDialog ofdEscaneo;
         private System.Windows.Forms.BindingSource etiquetasBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colClaveNombreArticulo;
         private DevExpress.XtraGrid.Columns.GridColumn colnumero_etiqueta;
-        private DevExpress.XtraGrid.Columns.GridColumn colclave_articulo;
-        private DevExpress.XtraGrid.Columns.GridColumn colarticulos;
         private DevExpress.XtraGrid.Columns.GridColumn colfecha_caducidad;
         private DevExpress.XtraGrid.Columns.GridColumn colcantidad;
         private DevExpress.XtraGrid.Columns.GridColumn colunidad;

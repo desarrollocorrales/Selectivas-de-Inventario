@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
+using DevExpress.XtraPrinting;
+using DevExpress.XtraPrintingLinks;
+using DevExpress.XtraGrid.Views.Base;
 using Selectivas_de_Almacen.Entity;
+using System.Drawing;
 
 namespace Selectivas_de_Almacen.GUIs
 {
     public partial class Frm_Principal : Form
     {
+        // Creando componentes de impresión.
+        PrintingSystem SistemaImpresion = new PrintingSystem();
+        PrintableComponentLink ComponenteImpresion = new PrintableComponentLink();
+        //.......
         private string sArchivoDeEscaneo;
 
         public Frm_Principal()
@@ -76,12 +81,29 @@ namespace Selectivas_de_Almacen.GUIs
             EtiquetasEntities Contexto = new EtiquetasEntities();
 
             List<etiquetas> listEtiquetas = new List<etiquetas>();
+            List<paquetes> listPaquetes = new List<paquetes>();
 
             var EtiquetasBuscadas = from buscaEtiqueta in Contexto.etiquetas
                                     where (listNumerosDeEtiquetas.Contains(buscaEtiqueta.numero_etiqueta))
                                     select buscaEtiqueta;
 
+            var TarimasBuscadas = from buscaPaquete in Contexto.paquetes
+                                  where (listNumerosDeEtiquetas.Contains(buscaPaquete.numero_etiqueta))
+                                  select buscaPaquete;
+
             listEtiquetas = EtiquetasBuscadas.OrderBy(o=>o.id_etiqueta).ToList();
+            listPaquetes = TarimasBuscadas.OrderBy(o => o.id_paquete).ToList();
+
+            foreach (paquetes paq in listPaquetes)
+            {
+                var listaDetallesPaqueteEntity = paq.paquetes_det;
+                List<paquetes_det> lstDetallesPaquete = listaDetallesPaqueteEntity.ToList();
+                lstDetallesPaquete = lstDetallesPaquete.FindAll(o => o.etiquetas.estatus == "A");
+                foreach (paquetes_det detalle in lstDetallesPaquete)
+                {
+                    listEtiquetas.Add(detalle.etiquetas); 
+                }
+            }
 
             gridEscaneo.DataSource = listEtiquetas;
             gvEscaneo.BestFitColumns();
@@ -111,13 +133,40 @@ namespace Selectivas_de_Almacen.GUIs
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            gridEscaneo.ShowPrintPreview();
+            ImprimirGrid();
         }
         private void ImprimirGrid()
         {
+            /******************************/
+            // Creamos el Header
+            PageHeaderArea Header = new PageHeaderArea();
+            ComponenteImpresion.Images.Add(Image.FromFile("logomini.png"));
+            Header.Content.AddRange(new string[] { "[Image 0]", "", "[Time Printed]" });
+            Header.LineAlignment = BrickAlignment.Far;
+            /******************************/
+
+            /******************************/
+            //Creamos el Footer
+            string izquierda = "Paginas: [Page # of Pages #]";
+            string centro    = "Usuario: [User Name]";
+            string derecha   =   "Fecha: [Date Printed]";
+            PageFooterArea Footer = new PageFooterArea();
+            Footer.Content.AddRange(new string[] { izquierda, centro, derecha });
+            Footer.LineAlignment = BrickAlignment.Near;
+            /*****************************/
+
+            /******************************/
+            //Agregar el Grid al documento
+            ComponenteImpresion.Component = gridEscaneo;
+            //Agregar el header y el footer al documento
+            ComponenteImpresion.PageHeaderFooter = new PageHeaderFooter(Header, Footer);          
+            //Crear el documento
+            ComponenteImpresion.CreateDocument(SistemaImpresion);
+            //Mostrar la vista previa para imprimir
+            ComponenteImpresion.ShowPreviewDialog();
         }
 
-        private void gvEscaneo_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        private void gvEscaneo_CustomColumnDisplayText(object sender, CustomColumnDisplayTextEventArgs e)
         {
             if (e.Column.FieldName == "estatus")
             {
@@ -134,5 +183,9 @@ namespace Selectivas_de_Almacen.GUIs
             }
         }
 
+        private void Frm_Principal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -41,5 +41,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="paquetes">
+      <EntityTypeMapping TypeName="SeguimientoModel.paquetes">
+        <MappingFragment StoreEntitySet="paquetes">
+          <ScalarProperty Name="clave_articulo" ColumnName="clave_articulo" />
+          <ScalarProperty Name="fecha_caducidad" ColumnName="fecha_caducidad" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+          <ScalarProperty Name="unidad" ColumnName="unidad" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="numero_etiqueta" ColumnName="numero_etiqueta" />
+          <ScalarProperty Name="id_paquete" ColumnName="id_paquete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="paquetes_det">
+      <EntityTypeMapping TypeName="SeguimientoModel.paquetes_det">
+        <MappingFragment StoreEntitySet="paquetes_det">
+          <ScalarProperty Name="id_etiqueta" ColumnName="id_etiqueta" />
+          <ScalarProperty Name="id_paquete" ColumnName="id_paquete" />
+          <ScalarProperty Name="id_detalle" ColumnName="id_detalle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
