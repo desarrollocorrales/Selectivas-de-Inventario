@@ -9,3 +9,14 @@ D:\Github\Selectivas-de-Inventario\Selectivas de Almacen\obj\x86\Debug\Selectiva
 D:\Github\Selectivas-de-Inventario\Selectivas de Almacen\bin\Debug\Selectivas de Almacen.exe.config
 D:\Github\Selectivas-de-Inventario\Selectivas de Almacen\obj\x86\Debug\Selectivas de Almacen.csprojResolveAssemblyReference.cache
 D:\Github\Selectivas-de-Inventario\Selectivas de Almacen\bin\Debug\logomini.png
+G:\Github\Selectivas-de-Inventario\Selectivas de Almacen\bin\Debug\Selectivas de Almacen.exe.config
+G:\Github\Selectivas-de-Inventario\Selectivas de Almacen\obj\x86\Debug\Selectivas de Almacen.exe
+G:\Github\Selectivas-de-Inventario\Selectivas de Almacen\obj\x86\Debug\Selectivas de Almacen.pdb
+G:\Github\Selectivas-de-Inventario\Selectivas de Almacen\bin\Debug\logomini.png
+G:\Github\Selectivas-de-Inventario\Selectivas de Almacen\bin\Debug\Selectivas de Almacen.exe
+G:\Github\Selectivas-de-Inventario\Selectivas de Almacen\bin\Debug\Selectivas de Almacen.pdb
+G:\Github\Selectivas-de-Inventario\Selectivas de Almacen\obj\x86\Debug\Selectivas de Almacen.csprojResolveAssemblyReference.cache
+G:\Github\Selectivas-de-Inventario\Selectivas de Almacen\obj\x86\Debug\Selectivas_de_Almacen.GUIs.Frm_Principal.resources
+G:\Github\Selectivas-de-Inventario\Selectivas de Almacen\obj\x86\Debug\Selectivas_de_Almacen.Properties.Resources.resources
+G:\Github\Selectivas-de-Inventario\Selectivas de Almacen\obj\x86\Debug\Selectivas de Almacen.csproj.GenerateResource.Cache
+G:\Github\Selectivas-de-Inventario\Selectivas de Almacen\obj\x86\Debug\Selectivas de Almacen.exe.licenses

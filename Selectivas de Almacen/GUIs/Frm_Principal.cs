@@ -108,9 +108,7 @@ namespace Selectivas_de_Almacen.GUIs
             gridEscaneo.DataSource = listEtiquetas;
             gvEscaneo.BestFitColumns();
         }
-
-        
-
+     
         private void btnBuscarArchivo_Click(object sender, EventArgs e)
         {
             obtenerArchivoDeEscaneo();
